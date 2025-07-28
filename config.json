@@ -1,0 +1,65 @@
+{
+  "name": "Embellish fields",
+  "description": "Module that allows further information to be displayed alongside data fields",
+  "namespace": "CCTC\\EmbellishFieldsModule",
+  "framework-version": 14,
+  "authors": [
+    {
+      "name": "Richard Hardy",
+      "email": "rmh54@cam.ac.uk",
+      "institution": "University of Cambridge - Cambridge Cancer Trials Centre"
+    }
+  ],
+  "links": {
+  },
+  "system-settings": [
+  ],
+  "project-settings": [
+    {
+      "key": "show-field-variable-name",
+      "name": "When checked, the field variable name will be shown",
+      "type": "checkbox",
+      "repeatable": false,
+      "required": false,
+      "super-users-only": true
+    },
+    {
+      "key": "show-field-element-type",
+      "name": "When checked, the field element type will be shown",
+      "type": "checkbox",
+      "repeatable": false,
+      "required": false,
+      "super-users-only": true
+    },
+    {
+      "key": "show-field-validation-type",
+      "name": "When checked, the field validation type will be shown",
+      "type": "checkbox",
+      "repeatable": false,
+      "required": false,
+      "super-users-only": true
+    },
+    {
+      "key": "include-action-tags",
+      "name": "When checked, using action tags on questions that match the regular expression in the Action Tag regex below will show the action tag on the form",
+      "type": "checkbox",
+      "repeatable": false,
+      "required": false,
+      "super-users-only": true
+    },
+    {
+      "key": "action-tag-regex",
+      "name": "A regular expression that determines which action tags are displayed when the action tags are selected for display. Do NOT include the surrounding /",
+      "type": "textarea",
+      "repeatable": false,
+      "required": false,
+      "super-users-only": true
+    }
+  ],
+  "compatibility": {
+    "php-version-min": "8.0.27",
+    "php-version-max": "",
+    "redcap-version-min": "13.8.1",
+    "redcap-version-max": ""
+  }
+}
