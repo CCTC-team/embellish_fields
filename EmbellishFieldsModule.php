@@ -6,6 +6,21 @@ use ExternalModules\AbstractExternalModule;
 
 class EmbellishFieldsModule extends AbstractExternalModule {
 
+    public function validateSettings($settings): ?string
+    {
+        if (array_key_exists("show-field-variable-name", $settings) && array_key_exists("show-field-element-type", $settings) && array_key_exists("show-field-validation-type", $settings) && array_key_exists("include-action-tags", $settings)) {
+            if(empty($settings['show-field-variable-name']) && empty($settings['show-field-element-type']) && empty($settings['show-field-validation-type']) && empty($settings['include-action-tags'])) {
+                return "Please ensure atleast one Embellish Fields External Module setting is configured.";
+            }
+        }
+        if (array_key_exists("include-action-tags", $settings)) {
+            If(!empty($settings['include-action-tags']) and empty($settings['action-tag-regex'])) {
+                return "Please ensure the Action Tag Regex is configured when including action tags.";
+            }
+        }
+        return null;
+    }
+
     public function redcap_data_entry_form($project_id, $record, $instrument, $event_id, $group_id, $repeat_instance): void
     {
         if (empty($project_id)) return;
@@ -38,6 +53,13 @@ class EmbellishFieldsModule extends AbstractExternalModule {
 
         //should include endpoints
         $includeEndpoints = $this->getProjectSetting('include-action-tags') == "true";
+
+        if (!$includeFieldName && !$includeFieldElementType && !$includeFieldValType && !$includeEndpoints) {
+            echo "<script type='text/javascript'>
+                    alert('Please ensure atleast one Embellish Fields External Module setting is configured.');
+                </script>";
+            return;
+        }
 
         if($includeEndpoints) {
             $actionTagRegex = $this->getProjectSetting('action-tag-regex');
