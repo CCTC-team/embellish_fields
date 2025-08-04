@@ -13,7 +13,7 @@ class EmbellishFieldsModule extends AbstractExternalModule {
                 return "Please ensure atleast one Embellish Fields External Module setting is configured.";
             }
         }
-        if (array_key_exists("include-action-tags", $settings)) {
+        if (array_key_exists("include-action-tags", $settings) && array_key_exists("action-tag-regex", $settings)) {
             If(!empty($settings['include-action-tags']) and empty($settings['action-tag-regex'])) {
                 return "Please ensure the Action Tag Regex is configured when including action tags.";
             }
