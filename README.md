@@ -4,6 +4,7 @@ The Embellish fields module is a simple module that can provide extra informatio
 entry form. The extra information is provided underneath the field label as a pipe-separated list
 
 #### Set up and configuration
+When a new version of the external module becomes available, it is recommended to disable and then re-enable the module from the Control Center.
 
 Settings are enabled at a project level and are as follows;
 
