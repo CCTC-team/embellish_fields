@@ -14,7 +14,7 @@ class EmbellishFieldsModule extends AbstractExternalModule {
             }
         }
         if (array_key_exists("include-action-tags", $settings) && array_key_exists("action-tag-regex", $settings)) {
-            If(!empty($settings['include-action-tags']) && empty($settings['action-tag-regex'])) {
+            if(!empty($settings['include-action-tags']) && empty($settings['action-tag-regex'])) {
                 return "Please ensure the Action Tag Regex is configured when including action tags.";
             }
         }
