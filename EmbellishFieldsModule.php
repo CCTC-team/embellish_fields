@@ -10,7 +10,7 @@ class EmbellishFieldsModule extends AbstractExternalModule {
     {
         if (array_key_exists("show-field-variable-name", $settings) && array_key_exists("show-field-element-type", $settings) && array_key_exists("show-field-validation-type", $settings) && array_key_exists("include-action-tags", $settings)) {
             if(empty($settings['show-field-variable-name']) && empty($settings['show-field-element-type']) && empty($settings['show-field-validation-type']) && empty($settings['include-action-tags'])) {
-                return "Please ensure atleast one Embellish Fields External Module setting is configured.";
+                return "Please ensure at least one Embellish Fields External Module setting is configured.";
             }
         }
         if (array_key_exists("include-action-tags", $settings) && array_key_exists("action-tag-regex", $settings)) {
@@ -56,7 +56,7 @@ class EmbellishFieldsModule extends AbstractExternalModule {
 
         if (!$includeFieldName && !$includeFieldElementType && !$includeFieldValType && !$includeEndpoints) {
             echo "<script type='text/javascript'>
-                    alert('Please ensure atleast one Embellish Fields External Module setting is configured.');
+                    alert('Please ensure at least one Embellish Fields External Module setting is configured.');
                 </script>";
             return;
         }
