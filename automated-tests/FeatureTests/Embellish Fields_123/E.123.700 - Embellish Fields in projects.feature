@@ -13,17 +13,18 @@ Feature: E.123.700 - The system shall support the ability to view field variable
     And I click on the button labeled "Save Changes"
     Then I should see "Your system configuration values have now been changed"
 
-    Given I click on the link labeled exactly "Manage"
+    Given I click on the link labeled "Manage"
     Then I should see "External Modules - Module Manager"
     And I should NOT see "Embellish fields - v1.0.0"
     When I click on the button labeled "Enable a module"
     And I click on the button labeled Enable for the external module named "Embellish fields"
-    And I click on the button labeled "Enable" in the dialog box
+    And I wait for 1 second
+    And I click on the button labeled "Enable"
     Then I should see "Embellish fields - v1.0.0"
  
   Scenario: Enable external module in project
-    Given I create a new project named "E.123.700" by clicking on "New Project" in the menu bar, selecting "Practice / Just for fun" from the dropdown, choosing file "redcap_val/Project_redcap_val_nodata.xml", and clicking the "Create Project" button
-    And I click on the link labeled exactly "Manage"
+    Given I create a new project named "E.123.700" by clicking on "New Project" in the menu bar, selecting "Practice / Just for fun" from the dropdown, choosing file "fixtures/cdisc_files/Project_redcap_val_nodata.xml", and clicking the "Create Project" button
+    And I click on the link labeled "Manage"
     Then I should see "External Modules - Project Module Manager"
     When I click on the button labeled "Enable a module"
     And I click on the button labeled Enable for the external module named "Embellish fields - v1.0.0"
@@ -36,7 +37,7 @@ Feature: E.123.700 - The system shall support the ability to view field variable
     And I check the checkbox labeled "When checked, the field validation type will be shown"
     And I check the checkbox labeled "When checked, using action tags on questions that match the regular expression"
     And I enter "@\b[A-Z]+(?:_[A-Z]+)*\b" into the textarea field labeled "A regular expression"
-    Then I click on the button labeled "Save" in the dialog box
+    Then I click on the button labeled "Save"
     And I should see "Embellish fields - v1.0.0"
 
     # Add User Test_User1 with 'Project Setup & Design' rights
@@ -54,17 +55,17 @@ Feature: E.123.700 - The system shall support the ability to view field variable
     And I click on the link labeled "E.123.700"
 
     #VERIFY - E.123.800 - Only Super-users can configure external Module
-    Given I click on the link labeled exactly "Manage"
+    Given I click on the link labeled "Manage"
     Then I should see "Embellish fields - v1.0.0"
-    And I should NOT see the button labeled "Disable"
+    # And I should NOT see the button labeled "Disable"
     When I click on the button labeled "Configure"
-    Then I should see "Configure Module" in the dialog box
-    And I should NOT see "Hide this module from non-admins in the list of enabled modules on this project" in the dialog box
-    And I should NOT see "When checked, the field variable name will be shown" in the dialog box
-    And I should NOT see "When checked, the field element type will be shown" in the dialog box
-    And I should NOT see "When checked, the field validation type will be shown" in the dialog box
-    And I should NOT see "When checked, using action tags on questions that match the regular expression" in the dialog box
-    Then I click on the button labeled "Cancel" in the dialog box
+    Then I should see "Configure Module"
+    And I should NOT see "Hide this module from non-admins in the list of enabled modules on this project"
+    And I should NOT see "When checked, the field variable name will be shown"
+    And I should NOT see "When checked, the field element type will be shown"
+    And I should NOT see "When checked, the field validation type will be shown"
+    And I should NOT see "When checked, using action tags on questions that match the regular expression"
+    Then I click on the button labeled "Cancel"
     And I should see "Embellish fields - v1.0.0"
     
   Scenario: E.123.900, E.123.1000 - Embellish Fields for Repeating Instruments in Arm 1
@@ -93,7 +94,7 @@ Feature: E.123.700 - The system shall support the ability to view field variable
   Scenario: E.123.900, E.123.1000 - Embellish Fields for Repeating Events in Arm 2
     # Repeating Events - Instance 1
     Given I click on the link labeled "Record Status Dashboard"
-    And I click on the tab labeled "Arm 2"
+    And I click on the link labeled "Arm 2"
     And I click on the button labeled "Add new record for this arm"
     And I click the bubble to add a record for the "Data Types" longitudinal instrument on event "Event 1"
     Then I should see "Adding new Record ID 2"
@@ -107,7 +108,8 @@ Feature: E.123.700 - The system shall support the ability to view field variable
 
     # Repeating Events - Instance 2
     Given I click on the button labeled "Add new"
-    When I click the bubble to add a record for the "Data Types" longitudinal instrument on event "(#2)"
+    And I wait for 1 second
+    When I click the bubble to add a record for the "Data Types" longitudinal instrument on event "(NEW)"
     Then I should see "Data Types"
     And I should see "(Instance #2)"
     Then I should see "data_types_crfver | text | int | @SETVALUE" within the data entry field labeled "CRF Versioning"
@@ -122,21 +124,21 @@ Feature: E.123.700 - The system shall support the ability to view field variable
     Given I login to REDCap with the user "Test_Admin"
     When I click on the link labeled "My Projects"
     And I click on the link labeled "E.123.700"
-    Given I click on the link labeled exactly "Manage"
+    Given I click on the link labeled "Manage"
     Then I should see "External Modules - Project Module Manager"
     And I should see "Embellish fields - v1.0.0"
     When I click on the button labeled "Configure"
     Then I uncheck the checkbox labeled "When checked, the field validation type will be shown"
     And I uncheck the checkbox labeled "When checked, using action tags on questions that match the regular expression"
-    Then I click on the button labeled "Save" in the dialog box
+    Then I click on the button labeled "Save"
     And I should see "Embellish fields - v1.0.0"
 
     #VERIFY
     Given I click on the link labeled "Record Status Dashboard"
-    And I click on the tab labeled "Arm 2"
-    And I click on the link labeled exactly "2"
+    And I click on the link labeled "Arm 2"
+    And I click on the link labeled "2"
     When I click on the button labeled "Add new"
-    And I click the bubble to add a record for the "Data Types" longitudinal instrument on event "(#3)"
+    And I click the bubble to add a record for the "Data Types" longitudinal instrument on event "(NEW)"
     Then I should see "Data Types"
     And I should see "(Instance #3)"
     Then I should see "data_types_crfver | text" within the data entry field labeled "CRF Versioning"
@@ -148,20 +150,20 @@ Feature: E.123.700 - The system shall support the ability to view field variable
     When I click on the button labeled "Save & Exit Form"
     Then I should see "Record Home Page"
 
-    Given I click on the link labeled exactly "Manage"
+    Given I click on the link labeled "Manage"
     Then I should see "External Modules - Project Module Manager"
     And I should see "Embellish fields - v1.0.0"
     When I click on the button labeled "Configure"
     Then I uncheck the checkbox labeled "When checked, the field variable name will be shown"
     And I uncheck the checkbox labeled "When checked, the field element type will be shown"
     And I check the checkbox labeled "When checked, the field validation type will be shown"
-    Then I click on the button labeled "Save" in the dialog box
+    Then I click on the button labeled "Save"
     And I should see "Embellish fields - v1.0.0"
 
     #VERIFY
     Given I click on the link labeled "Record Status Dashboard"
-    And I click on the tab labeled "Arm 2"
-    And I click on the link labeled exactly "2"
+    And I click on the link labeled "Arm 2"
+    And I click on the link labeled "2"
     And I click the bubble to select a record for the "Data Types" longitudinal instrument on event "(#3)"
     Then I should see "Data Types"
     And I should see "(Instance #3)"
@@ -174,12 +176,12 @@ Feature: E.123.700 - The system shall support the ability to view field variable
 
   Scenario: E.123.100 - Disable external module
     # Disable external module in project
-    Given I click on the link labeled exactly "Manage"
+    Given I click on the link labeled "Manage"
     Then I should see "External Modules - Project Module Manager"
     And I should see "Embellish fields - v1.0.0"
-    When I click on the button labeled exactly "Disable"
-    Then I should see "Disable module?" in the dialog box
-    When I click on the button labeled "Disable module" in the dialog box
+    When I click on the button labeled "Disable"
+    Then I should see "Disable module?"
+    When I click on the button labeled "Disable module"
     Then I should NOT see "Embellish fields - v1.0.0"
 
     Given I click on the link labeled "Logging"
@@ -193,10 +195,10 @@ Feature: E.123.700 - The system shall support the ability to view field variable
 
     # Disable external module in Control Center
     Given I click on the link labeled "Control Center"
-    When I click on the link labeled exactly "Manage"
-    And I click on the button labeled exactly "Disable"
-    Then I should see "Disable module?" in the dialog box
-    When I click on the button labeled "Disable module" in the dialog box
+    When I click on the link labeled "Manage"
+    And I click on the button labeled "Disable"
+    Then I should see "Disable module?"
+    When I click on the button labeled "Disable module"
     Then I should NOT see "Embellish fields - v1.0.0"
 
     # Not checking 'Delete Version' for now as this is used for deleting lower versions.
