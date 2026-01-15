@@ -1,0 +1,9 @@
+# CODEOWNERS - Defines code ownership and review requirements for different paths
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default: All files require review from team leads or designated reviewers
+* @rmh54
+
+# Automated tests can be self-merged by the test automation owner
+/automated_tests/** @MintooXavier
+
