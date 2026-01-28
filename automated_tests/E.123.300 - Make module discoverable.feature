@@ -18,7 +18,9 @@ Scenario: E.123.300 - Make module discoverable by users
     Then I should see "External Modules - Module Manager"
     And I should NOT see "Embellish fields - v1.0.0"
     When I click on the button labeled "Enable a module"
-    And I click on the button labeled Enable for the external module named "Embellish fields"
+    And I wait for 2 seconds
+    Then I should see "Available Modules"
+    And I click on the button labeled "Enable" in the row labeled "Embellish fields"
     And I wait for 1 second
     And I click on the button labeled "Enable"
     Then I should see "Embellish fields - v1.0.0"
@@ -41,7 +43,7 @@ Scenario: E.123.300 - Make module discoverable by users
     Then I should see "Embellish fields - v1.0.0"
     And I should see "Discoverable"
     And I should NOT see "Activation request is pending"
-    When I click on the button labeled Request Activation for the external module named "Embellish fields"
+    When I click on the button labeled "Request Activation" in the row labeled "Embellish fields"
     Then I should see "SUCCESS"
     And I click on the button labeled "Close"
     And I should NOT see "Embellish fields - v1.0.0"

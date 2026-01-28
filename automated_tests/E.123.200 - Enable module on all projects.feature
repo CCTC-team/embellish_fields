@@ -10,7 +10,9 @@ Scenario: E.123.200 - Enable module on all projects by default
     Then I should see "External Modules - Module Manager"
     And I should NOT see "Embellish fields - v1.0.0"
     When I click on the button labeled "Enable a module"
-    And I click on the button labeled Enable for the external module named "Embellish fields"
+    And I wait for 2 seconds
+    Then I should see "Available Modules"
+    And I click on the button labeled "Enable" in the row labeled "Embellish fields"
     And I wait for 1 second
     And I click on the button labeled "Enable"
     Then I should see "Embellish fields - v1.0.0"
