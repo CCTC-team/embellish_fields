@@ -3,16 +3,18 @@
   "description": "Module that allows further information to be displayed alongside data fields",
   "namespace": "CCTC\\EmbellishFieldsModule",
   "framework-version": 14,
+  "documentation": "https://github.com/CCTC/embellish_fields",
   "authors": [
     {
       "name": "Richard Hardy",
       "email": "rmh54@cam.ac.uk",
       "institution": "University of Cambridge - Cambridge Cancer Trials Centre"
+    },
+    {
+      "name": "Mintoo Xavier",
+      "email": "mintoo.xavier1@nhs.net",
+      "institution": "Cambridge University Hospital - Cambridge Cancer Trials Centre"
     }
-  ],
-  "links": {
-  },
-  "system-settings": [
   ],
   "project-settings": [
     {
@@ -53,7 +55,11 @@
       "type": "textarea",
       "repeatable": false,
       "required": false,
-      "super-users-only": true
+      "super-users-only": true,
+       "branchingLogic": {
+        "field": "include-action-tags",
+        "value": true
+      }
     }
   ],
   "compatibility": {

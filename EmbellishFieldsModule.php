@@ -27,32 +27,15 @@ class EmbellishFieldsModule extends AbstractExternalModule {
 
         global $Proj;
 
-        echo "
-            <script type='text/javascript'>
-                function AddTag(field, actionTag) {
-                    let ele = document.getElementById('label-' + field);
-                    if(ele) {                        
-                        const info = document.createElement('div');                    
-                        info.innerHTML = '<small>' + actionTag + '</small>';                    
-                        info.style.color = 'rgb(58, 113, 165)';
-                        info.style.fontWeight = 'normal';
-                        
-                        ele.insertAdjacentElement('afterend', info);
-                    }                    
-                }
-            </script>";
+        // Include external CSS and JavaScript files
+        echo '<link rel="stylesheet" href="' . $this->getUrl('css/embellish.css') . '">';
+        echo '<script src="' . $this->getUrl('js/embellish.js') . '"></script>';
 
-        //should include field name
-        $includeFieldName = $this->getProjectSetting('show-field-variable-name') == "true";
-
-        //should include field type
-        $includeFieldElementType = $this->getProjectSetting('show-field-element-type') == "true";
-
-        //should include field validation type
-        $includeFieldValType = $this->getProjectSetting('show-field-validation-type') == "true";
-
-        //should include endpoints
-        $includeEndpoints = $this->getProjectSetting('include-action-tags') == "true";
+        // Get settings using boolean cast for reliable checkbox handling
+        $includeFieldName = (bool)$this->getProjectSetting('show-field-variable-name');
+        $includeFieldElementType = (bool)$this->getProjectSetting('show-field-element-type');
+        $includeFieldValType = (bool)$this->getProjectSetting('show-field-validation-type');
+        $includeEndpoints = (bool)$this->getProjectSetting('include-action-tags');
 
         if (!$includeFieldName && !$includeFieldElementType && !$includeFieldValType && !$includeEndpoints) {
             echo "<script type='text/javascript'>
@@ -88,11 +71,22 @@ class EmbellishFieldsModule extends AbstractExternalModule {
                 $trimmedRegex = trim($actionTagRegex);
 
                 //only include if the action regex is present and valid
-                if($trimmedRegex != null && trim($trimmedRegex) != "") {
-                    preg_match_all("/$actionTagRegex/", $attrs['misc'], $matches);
-                    if(!empty($matches[0])){
-                        foreach ($matches[0] as $match) {
-                            $infoToDisplay[$field][] = $match;
+                if(!empty($trimmedRegex)) {
+                    // Security fix: Validate regex pattern before use to prevent errors
+                    if (@preg_match("/" . $trimmedRegex . "/", '') === false) {
+                        // Invalid regex pattern - log error and skip
+                        $this->log('Invalid regex pattern configured', [
+                            'pattern' => $trimmedRegex,
+                            'project_id' => $project_id,
+                            'field' => $field
+                        ]);
+                    } else {
+                        preg_match_all("/" . $trimmedRegex . "/", $attrs['misc'], $matches);
+                        if(!empty($matches[0])){
+                            foreach ($matches[0] as $match) {
+                                // Escape match content for safety
+                                $infoToDisplay[$field][] = htmlspecialchars($match, ENT_QUOTES, 'UTF-8');
+                            }
                         }
                     }
                 }
@@ -102,7 +96,10 @@ class EmbellishFieldsModule extends AbstractExternalModule {
         foreach ($infoToDisplay as $field => $info) {
             //display the items
             $infoAsString = implode(" | ", $info);
-            echo "<script type='text/javascript'> AddTag('$field','$infoAsString') </script>";
+            // Security fix: Use json_encode to prevent XSS attacks from field names or action tags
+            $safeField = json_encode($field);
+            $safeInfo = json_encode($infoAsString);
+            echo "<script type='text/javascript'> AddTag($safeField, $safeInfo) </script>";
         }
     }
 }

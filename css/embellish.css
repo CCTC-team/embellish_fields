@@ -1,0 +1,13 @@
+/**
+ * Embellish Fields External Module Styles
+ */
+
+.embellish-field-info {
+    color: rgb(58, 113, 165);
+    font-weight: normal;
+    margin-top: 2px;
+}
+
+.embellish-field-info small {
+    font-size: 0.85em;
+}
