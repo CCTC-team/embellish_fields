@@ -8,7 +8,7 @@ The Embellish Fields module enhances REDCap data entry forms by displaying addit
 
 - **Namespace**: `CCTC\EmbellishFieldsModule`
 - **Framework Version**: 14
-- **Documentation**: https://github.com/CCTC/embellish_fields
+- **Documentation**: https://github.com/CCTC-team/embellish_fields
 - **Authors**:
   - Richard Hardy (University of Cambridge - Cambridge Cancer Trials Centre)
   - Mintoo Xavier (Cambridge University Hospital - Cambridge Cancer Trials Centre)
@@ -149,41 +149,6 @@ When configured to show field variable name and validation type, a field might d
 Patient Age: [_____]
 patient_age | int
 ```
-
-## Completed Improvements
-
-The following improvements from the [IMPROVEMENT_PLAN.md](IMPROVEMENT_PLAN.md) have been implemented:
-
-### Phase 1: Critical Security Fixes
-| Item | Status | Description |
-|------|--------|-------------|
-| 1.1 XSS Vulnerability Fix | Completed | Field names and action tags are `json_encode()`-ed before JavaScript injection |
-| 1.2 Regex Validation | Completed | Invalid regex patterns are caught, logged, and skipped |
-
-### Phase 2: Configuration Improvements
-| Item | Status | Description |
-|------|--------|-------------|
-| Documentation URL | Completed | Added to `config.json` |
-| Branching Logic | Completed | Action Tag Regex field is conditionally shown based on Include Action Tags |
-| Clean up empty arrays | Completed | Removed unused `links` and `system-settings` arrays from `config.json` |
-| Permissions declaration | Not yet | `permissions` array not yet added to `config.json` |
-
-### Phase 3: Code Quality
-| Item | Status | Description |
-|------|--------|-------------|
-| 3.1 Boolean comparisons | Completed | Settings use `(bool)` cast instead of string comparison |
-| 3.2 Remove redundant alert | Not yet | Runtime alert for no settings configured is still present |
-| 3.3 Replace global $Proj | Not yet | Still using `global $Proj` for field metadata access |
-| 3.4 Externalize JavaScript | Completed | `js/embellish.js` created with `AddTag()` and `escapeHtml()` |
-| 3.5 Externalize CSS | Completed | `css/embellish.css` created with `.embellish-field-info` styles |
-
-### Phase 4: Feature Enhancements
-| Item | Status | Description |
-|------|--------|-------------|
-| 4.1 Survey support | Not yet | Only `redcap_data_entry_form` hook is implemented |
-| 4.2 Shared renderEmbellishments() | Not yet | Logic remains in the hook method directly |
-| 4.3 Debug logging | Not yet | No system-level debug logging setting |
-| 4.4 PHPDoc comments | Not yet | No PHPDoc annotations added to PHP class |
 
 ## Troubleshooting
 

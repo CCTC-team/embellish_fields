@@ -3,7 +3,7 @@
   "description": "Module that allows further information to be displayed alongside data fields",
   "namespace": "CCTC\\EmbellishFieldsModule",
   "framework-version": 14,
-  "documentation": "https://github.com/CCTC/embellish_fields",
+  "documentation": "https://github.com/CCTC-team/embellish_fields",
   "authors": [
     {
       "name": "Richard Hardy",
