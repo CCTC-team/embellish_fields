@@ -2,7 +2,7 @@
   "name": "Embellish fields",
   "description": "Module that allows further information to be displayed alongside data fields",
   "namespace": "CCTC\\EmbellishFieldsModule",
-  "framework-version": 14,
+  "framework-version": 16,
   "documentation": "https://github.com/CCTC-team/embellish_fields",
   "authors": [
     {
