@@ -15,22 +15,22 @@ Feature: E.123.700 - The system shall support the ability to view field variable
 
     Given I click on the link labeled "Manage"
     Then I should see "External Modules - Module Manager"
-    And I should NOT see "Embellish fields - v1.0.0"
+    And I should NOT see "Embellish fields - v1.0.1"
     When I click on the button labeled "Enable a module"
     And I wait for 2 seconds
     Then I should see "Available Modules"
     And I click on the button labeled "Enable" in the row labeled "Embellish fields"
     And I wait for 1 second
     And I click on the button labeled "Enable"
-    Then I should see "Embellish fields - v1.0.0"
+    Then I should see "Embellish fields - v1.0.1"
  
   Scenario: Enable external module in project
     Given I create a new project named "E.123.700" by clicking on "New Project" in the menu bar, selecting "Practice / Just for fun" from the dropdown, choosing file "fixtures/cdisc_files/Project_redcap_val_nodata.xml", and clicking the "Create Project" button
     And I click on the link labeled "Manage"
     Then I should see "External Modules - Project Module Manager"
     When I click on the button labeled "Enable a module"
-    And I click on the button labeled "Enable" in the row labeled "Embellish fields - v1.0.0"
-    Then I should see "Embellish fields - v1.0.0"
+    And I click on the button labeled "Enable" in the row labeled "Embellish fields - v1.0.1"
+    Then I should see "Embellish fields - v1.0.1"
 
     #VERIFY - E.123.700
     And I click on the button labeled "Configure"
@@ -40,7 +40,7 @@ Feature: E.123.700 - The system shall support the ability to view field variable
     And I check the checkbox labeled "When checked, using action tags on questions that match the regular expression"
     And I enter "@\b[A-Z]+(?:_[A-Z]+)*\b" into the textarea field labeled "A regular expression"
     Then I click on the button labeled "Save"
-    And I should see "Embellish fields - v1.0.0"
+    And I should see "Embellish fields - v1.0.1"
 
     # Add User Test_User1 with 'Project Setup & Design' rights
     Given I click on the link labeled "User Rights"
@@ -58,7 +58,7 @@ Feature: E.123.700 - The system shall support the ability to view field variable
 
     #VERIFY - E.123.800 - Only Super-users can configure external Module
     Given I click on the link labeled "Manage"
-    Then I should see "Embellish fields - v1.0.0"
+    Then I should see "Embellish fields - v1.0.1"
     # And I should NOT see the button labeled "Disable"
     When I click on the button labeled "Configure"
     Then I should see "Configure Module"
@@ -68,7 +68,7 @@ Feature: E.123.700 - The system shall support the ability to view field variable
     And I should NOT see "When checked, the field validation type will be shown"
     And I should NOT see "When checked, using action tags on questions that match the regular expression"
     Then I click on the button labeled "Cancel"
-    And I should see "Embellish fields - v1.0.0"
+    And I should see "Embellish fields - v1.0.1"
     
   Scenario: E.123.900, E.123.1000 - Embellish Fields for Repeating Instruments in Arm 1
     # Repeating Instruments - Instance 1
@@ -128,12 +128,12 @@ Feature: E.123.700 - The system shall support the ability to view field variable
     And I click on the link labeled "E.123.700"
     Given I click on the link labeled "Manage"
     Then I should see "External Modules - Project Module Manager"
-    And I should see "Embellish fields - v1.0.0"
+    And I should see "Embellish fields - v1.0.1"
     When I click on the button labeled "Configure"
     Then I uncheck the checkbox labeled "When checked, the field validation type will be shown"
     And I uncheck the checkbox labeled "When checked, using action tags on questions that match the regular expression"
     Then I click on the button labeled "Save"
-    And I should see "Embellish fields - v1.0.0"
+    And I should see "Embellish fields - v1.0.1"
 
     #VERIFY
     Given I click on the link labeled "Record Status Dashboard"
@@ -154,13 +154,13 @@ Feature: E.123.700 - The system shall support the ability to view field variable
 
     Given I click on the link labeled "Manage"
     Then I should see "External Modules - Project Module Manager"
-    And I should see "Embellish fields - v1.0.0"
+    And I should see "Embellish fields - v1.0.1"
     When I click on the button labeled "Configure"
     Then I uncheck the checkbox labeled "When checked, the field variable name will be shown"
     And I uncheck the checkbox labeled "When checked, the field element type will be shown"
     And I check the checkbox labeled "When checked, the field validation type will be shown"
     Then I click on the button labeled "Save"
-    And I should see "Embellish fields - v1.0.0"
+    And I should see "Embellish fields - v1.0.1"
 
     #VERIFY
     Given I click on the link labeled "Record Status Dashboard"
@@ -180,20 +180,20 @@ Feature: E.123.700 - The system shall support the ability to view field variable
     # Disable external module in project
     Given I click on the link labeled "Manage"
     Then I should see "External Modules - Project Module Manager"
-    And I should see "Embellish fields - v1.0.0"
+    And I should see "Embellish fields - v1.0.1"
     When I click on the button labeled "Disable"
     Then I should see "Disable module?"
     When I click on the button labeled "Disable module"
-    Then I should NOT see "Embellish fields - v1.0.0"
+    Then I should NOT see "Embellish fields - v1.0.1"
 
     Given I click on the link labeled "Logging"
     Then I should see a table header and row containing the following values in the logging table:
       | Time / Date      | Username   | Action                                                                         | List of Data Changes OR Fields Exported                                                                                                                             |
-      | mm/dd/yyyy hh:mm | test_admin | Disable external module "embellish_fields_v1.0.0" for project                  |                                                                                                                                                                     |
-      | mm/dd/yyyy hh:mm | test_admin | Modify configuration for external module "embellish_fields_v1.0.0" for project | show-field-variable-name, show-field-element-type, show-field-validation-type                                                                                       |
-      | mm/dd/yyyy hh:mm | test_admin | Modify configuration for external module "embellish_fields_v1.0.0" for project | show-field-validation-type, include-action-tags                                                                                                                     |
-      | mm/dd/yyyy hh:mm | test_admin | Modify configuration for external module "embellish_fields_v1.0.0" for project | reserved-hide-from-non-admins-in-project-list, show-field-variable-name, show-field-element-type, show-field-validation-type, include-action-tags, action-tag-regex |
-      | mm/dd/yyyy hh:mm | test_admin | Enable external module "embellish_fields_v1.0.0" for project                   |                                                                                                                                                                     |
+      | mm/dd/yyyy hh:mm | test_admin | Disable external module "embellish_fields_v1.0.1" for project                  |                                                                                                                                                                     |
+      | mm/dd/yyyy hh:mm | test_admin | Modify configuration for external module "embellish_fields_v1.0.1" for project | show-field-variable-name, show-field-element-type, show-field-validation-type                                                                                       |
+      | mm/dd/yyyy hh:mm | test_admin | Modify configuration for external module "embellish_fields_v1.0.1" for project | show-field-validation-type, include-action-tags                                                                                                                     |
+      | mm/dd/yyyy hh:mm | test_admin | Modify configuration for external module "embellish_fields_v1.0.1" for project | reserved-hide-from-non-admins-in-project-list, show-field-variable-name, show-field-element-type, show-field-validation-type, include-action-tags, action-tag-regex |
+      | mm/dd/yyyy hh:mm | test_admin | Enable external module "embellish_fields_v1.0.1" for project                   |                                                                                                                                                                     |
 
     # Disable external module in Control Center
     Given I click on the link labeled "Control Center"
@@ -201,7 +201,7 @@ Feature: E.123.700 - The system shall support the ability to view field variable
     And I click on the button labeled "Disable"
     Then I should see "Disable module?"
     When I click on the button labeled "Disable module"
-    Then I should NOT see "Embellish fields - v1.0.0"
+    Then I should NOT see "Embellish fields - v1.0.1"
 
     # Not checking 'Delete Version' for now as this is used for deleting lower versions.
     # If the entire EM is deleted REDCap throws an error
@@ -209,11 +209,11 @@ Feature: E.123.700 - The system shall support the ability to view field variable
     Given I click on the link labeled "User Activity Log"
     Then I should see a table header and row containing the following values in a table:
       | Time             | User       | Event                                                                          |
-      | mm/dd/yyyy hh:mm | test_admin | Disable external module "embellish_fields_v1.0.0" for system                   |
-      | mm/dd/yyyy hh:mm | test_admin | Disable external module "embellish_fields_v1.0.0" for project                  |
-      | mm/dd/yyyy hh:mm | test_admin | Modify configuration for external module "embellish_fields_v1.0.0" for project |
-      | mm/dd/yyyy hh:mm | test_admin | Enable external module "embellish_fields_v1.0.0" for project                   |
-      | mm/dd/yyyy hh:mm | test_admin | Enable external module "embellish_fields_v1.0.0" for system                    |
+      | mm/dd/yyyy hh:mm | test_admin | Disable external module "embellish_fields_v1.0.1" for system                   |
+      | mm/dd/yyyy hh:mm | test_admin | Disable external module "embellish_fields_v1.0.1" for project                  |
+      | mm/dd/yyyy hh:mm | test_admin | Modify configuration for external module "embellish_fields_v1.0.1" for project |
+      | mm/dd/yyyy hh:mm | test_admin | Enable external module "embellish_fields_v1.0.1" for project                   |
+      | mm/dd/yyyy hh:mm | test_admin | Enable external module "embellish_fields_v1.0.1" for system                    |
 
     And I logout
 
