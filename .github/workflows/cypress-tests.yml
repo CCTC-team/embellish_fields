@@ -17,7 +17,7 @@ env:
   RSVC_BRANCH: "redcap_val"
   RCTF_BRANCH: "redcap_val"
   EM_NAME: "embellish_fields"
-  EM_VERSION: "v1.0.1"
+  EM_VERSION: "v1.0.2"
 
 jobs:
   cypress-tests:
