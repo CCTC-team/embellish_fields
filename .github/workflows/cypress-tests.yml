@@ -172,8 +172,14 @@ jobs:
       - name: Install Cypress and dependencies
         working-directory: redcap_cypress
         run: |
-          npm install
-          npm run redcap_rsvc:install || echo "RSVC install failed or not needed"
+          # npm ci installs exactly the committed package-lock.json, so esbuild's
+          # JS wrapper and its native @esbuild/<platform> binary always match.
+          # The old `npm install` + `redcap_rsvc:install` flow ran `clean`, which
+          # deleted package-lock.json and reinstalled lockless — that version drift
+          # produced esbuild's "Expected id 3 but got id 2" transform crash while
+          # loading cypress.config.js. EM fixtures come from the EM repo's
+          # automated_tests/fixtures, so no redcap_rsvc fixture copy is needed.
+          npm ci
 
       - name: Patch rctf after:run handler
         working-directory: redcap_cypress
