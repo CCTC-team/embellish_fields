@@ -8,16 +8,16 @@ Feature: E.123.100 - The system shall support the ability to enable/disable Embe
     When I click on the link labeled "Control Center"
     And I click on the link labeled "Manage"
     Then I should see "External Modules - Module Manager"
-    And I should NOT see "Embellish fields - v1.0.2"
+    And I should NOT see "Embellish fields - v1.0.3"
     When I click on the button labeled "Enable a module"
     And I wait for 2 seconds
     Then I should see "Available Modules"
     And I click on the button labeled "Enable" in the row labeled "Embellish fields"
     And I wait for 1 second
     And I click on the button labeled "Enable"
-    Then I should see "Embellish fields - v1.0.2"
+    Then I should see "Embellish fields - v1.0.3"
     And I logout
-    
+
     Given I login to REDCap with the user "Test_User1"
     When I create a new project named "E.123.100" by clicking on "New Project" in the menu bar, selecting "Practice / Just for fun" from the dropdown, choosing file "fixtures/cdisc_files/Project_redcap_val_nodata.xml", and clicking the "Create Project" button
     # And I should NOT see a link labeled "Manage"
@@ -30,7 +30,7 @@ Feature: E.123.100 - The system shall support the ability to enable/disable Embe
     And I click on the button labeled "Disable"
     Then I should see "Disable module?"
     When I click on the button labeled "Disable module"
-    Then I should NOT see "Embellish fields - v1.0.2"
+    Then I should NOT see "Embellish fields - v1.0.3"
     And I logout
 
     # Verify no exceptions are thrown in the system
