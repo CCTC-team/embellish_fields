@@ -177,9 +177,13 @@ jobs:
           # The old `npm install` + `redcap_rsvc:install` flow ran `clean`, which
           # deleted package-lock.json and reinstalled lockless — that version drift
           # produced esbuild's "Expected id 3 but got id 2" transform crash while
-          # loading cypress.config.js. EM fixtures come from the EM repo's
-          # automated_tests/fixtures, so no redcap_rsvc fixture copy is needed.
+          # loading cypress.config.js.
           npm ci
+          # move_files copies the redcap_rsvc fixtures (cdisc_files, dictionaries,
+          # import_files, schemas, expected_exports) into cypress/fixtures. This is
+          # the non-destructive half of the old redcap_rsvc:install — it does NOT
+          # delete package-lock.json, so the deterministic npm ci tree is preserved.
+          npm run redcap_rsvc:move_files
 
       - name: Patch rctf after:run handler
         working-directory: redcap_cypress
