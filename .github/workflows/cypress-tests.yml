@@ -144,6 +144,13 @@ jobs:
           echo "${{ secrets.CCTC_TEAM_PAT }}" | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
 
       - name: Pull prebuilt image and start Docker services
+        env:
+          # The prebuilt image bakes REDCap source at build time, so it does NOT contain
+          # the EM under test. docker-compose.em.yml bind-mounts the injected EM into the
+          # image's modules dir at runtime (no rebuild); the EM's own automated_tests
+          # steps then enable it, exactly as the old bake-it-in build flow did.
+          EM_HOST_PATH: ${{ github.workspace }}/CCTC_REDCap_Docker/redcap_source/modules/${{ env.EM_NAME }}_${{ env.EM_VERSION }}
+          EM_DIR: ${{ env.EM_NAME }}_${{ env.EM_VERSION }}
         run: |
           cd CCTC_REDCap_Docker/redcap_docker
 
@@ -155,11 +162,17 @@ jobs:
 
           # Pull the shared prebuilt REDCap image (built by CCTC_REDCap_Docker) instead of
           # rebuilding from source — every run uses the byte-identical image, removing
-          # build time and build-variance as a flakiness source.
-          docker compose -f docker-compose.yml -f docker-compose.prebuilt.yml pull app
+          # build time and build-variance as a flakiness source. The EM under test is
+          # layered in via docker-compose.em.yml (bind mount) rather than baked.
+          COMPOSE="-f docker-compose.yml -f docker-compose.prebuilt.yml -f docker-compose.em.yml"
 
-          # Start all services using the pulled image
-          docker compose -f docker-compose.yml -f docker-compose.prebuilt.yml up -d
+          echo "EM mounted from: $EM_HOST_PATH -> /var/www/html/modules/$EM_DIR"
+          ls -la "$EM_HOST_PATH" | head
+
+          docker compose $COMPOSE pull app
+
+          # Start all services using the pulled image + the EM bind mount
+          docker compose $COMPOSE up -d
 
       - name: Wait for services to be ready
         run: |
