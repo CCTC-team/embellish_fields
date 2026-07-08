@@ -140,6 +140,9 @@ jobs:
         if: always()
         with:
           name: ${{ env.EM_NAME }}_${{ env.EM_VERSION }}-cypress-results
+          # Replace this run's artifact on "Re-run failed jobs" (same run ID) so
+          # publish-report merges the fresh rerun JSON, not the stale failing one.
+          overwrite: true
           path: |
             results/json/*.json
             results/html/**
