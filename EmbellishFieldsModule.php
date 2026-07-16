@@ -163,12 +163,7 @@ class EmbellishFieldsModule extends AbstractExternalModule {
         $keys = [];
         foreach ($settings as $s) {
             if (!isset($s['key'])) continue;
-            $type = $s['type'] ?? '';
-            if ($type === 'descriptive') continue;
-            if ($type === 'sub_settings') {
-                $keys = array_merge($keys, $this->collectSettingKeys($s['sub_settings'] ?? []));
-                continue;
-            }
+            if (($s['type'] ?? '') === 'descriptive') continue;
             $keys[] = $s['key'];
         }
         return $keys;

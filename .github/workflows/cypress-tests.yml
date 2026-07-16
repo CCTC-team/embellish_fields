@@ -324,7 +324,9 @@ jobs:
         run: |
           cd site
           # Root index lists every published version folder, newest first; the
-          # highest version is marked (latest).
+          # highest version is marked (latest). Version dirs are vX.Y.Z (no odd
+          # chars), so globbing with ls is safe here.
+          # shellcheck disable=SC2012
           versions=$(ls -d v*/ 2>/dev/null | sed 's#/##' | sort -Vr)
           latest=$(echo "$versions" | head -n1)
           {
