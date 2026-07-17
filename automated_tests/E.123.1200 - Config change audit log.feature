@@ -102,6 +102,17 @@ Feature: E.123.1200 - The system shall record configuration changes for the Embe
       | setting   | action-tag-regex |
       | old_value | @FOO             |
       | new_value | @BAR             |
+    And I click on the button labeled "Close"
+    Then I should see "External Module Logs"
+
+    # Disable the external module from the Control Center
+    When I click on the link labeled "Control Center"
+    And I click on the link labeled "Manage"
+    Then I should see "External Modules - Module Manager"
+    And I click on the button labeled "Disable"
+    Then I should see "Disable module?"
+    When I click on the button labeled "Disable module"
+    Then I should NOT see "Embellish fields - v1.1.0"
 
     # Verify no exceptions are thrown in the system
     Given I open Email
