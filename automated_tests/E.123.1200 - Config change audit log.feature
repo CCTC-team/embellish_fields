@@ -9,22 +9,22 @@ Feature: E.123.1200 - The system shall record configuration changes for the Embe
     When I click on the link labeled "Control Center"
     And I click on the link labeled "Manage"
     Then I should see "External Modules - Module Manager"
-    And I should NOT see "Embellish fields - v1.0.3"
+    And I should NOT see "Embellish fields - v1.1.0"
     When I click on the button labeled "Enable a module"
     And I wait for 2 seconds
     Then I should see "Available Modules"
     And I click on the button labeled "Enable" in the row labeled "Embellish fields"
     And I wait for 1 second
     And I click on the button labeled "Enable"
-    Then I should see "Embellish fields - v1.0.3"
+    Then I should see "Embellish fields - v1.1.0"
 
   Scenario: First configuration save logs the initial values
     Given I create a new project named "E.123.1200" by clicking on "New Project" in the menu bar, selecting "Practice / Just for fun" from the dropdown, choosing file "fixtures/cdisc_files/Project_redcap_val_nodata.xml", and clicking the "Create Project" button
     And I click on the link labeled "Manage"
     Then I should see "External Modules - Project Module Manager"
     When I click on the button labeled "Enable a module"
-    And I click on the button labeled "Enable" in the row labeled "Embellish fields - v1.0.3"
-    Then I should see "Embellish fields - v1.0.3"
+    And I click on the button labeled "Enable" in the row labeled "Embellish fields - v1.1.0"
+    Then I should see "Embellish fields - v1.1.0"
 
     # First save has no prior snapshot, so each setting the admin actually sets is
     # logged as (empty) -> value. Blank settings stay empty and are not logged.
@@ -33,7 +33,7 @@ Feature: E.123.1200 - The system shall record configuration changes for the Embe
     And I check the checkbox labeled "When checked, using action tags on questions that match the regular expression"
     And I enter "@FOO" into the textarea field labeled "A regular expression"
     Then I click on the button labeled "Save"
-    And I should see "Embellish fields - v1.0.3"
+    And I should see "Embellish fields - v1.1.0"
 
     #VERIFY - the audit trail on the module's own View Logs page
     When I click on the link labeled "View Logs"
@@ -77,14 +77,14 @@ Feature: E.123.1200 - The system shall record configuration changes for the Embe
     And I click on the link labeled "E.123.1200"
     And I click on the link labeled "Manage"
     Then I should see "External Modules - Project Module Manager"
-    And I should see "Embellish fields - v1.0.3"
+    And I should see "Embellish fields - v1.1.0"
 
     # Change the action-tag regex from @FOO to @BAR. old->new genuinely matters
     # for this non-binary text setting, unlike the checkboxes.
     When I click on the button labeled "Configure"
     And I clear field and enter "@BAR" into the textarea field labeled "A regular expression"
     Then I click on the button labeled "Save"
-    And I should see "Embellish fields - v1.0.3"
+    And I should see "Embellish fields - v1.1.0"
 
     #VERIFY - the audit trail on the module's own View Logs page
     When I click on the link labeled "View Logs"
