@@ -52,6 +52,15 @@ The **Action Tag Regex** field is only visible when **Include Action Tags** is c
 - At least one display option must be enabled for the module to function
 - If "Include Action Tags" is enabled, the "Action Tag Regex" field must be configured
 
+### Configuration audit log
+
+`redcap_module_save_configuration($project_id)` records every configuration change to the module's **View Logs**
+page. On save it diffs the submitted settings against the values held beforehand and writes one
+`Configuration changed (project)` entry per changed key, carrying the setting name and its old and new values as
+log parameters — REDCap shows these to super-users via the **Show Parameters** button. The first save diffs against
+an empty baseline, so initial values are logged as `(empty) -> value`; settings left blank are not logged. This
+module has no system-level settings, so the hook's system-scope branch never logs.
+
 ## Usage
 
 ### Basic Setup
