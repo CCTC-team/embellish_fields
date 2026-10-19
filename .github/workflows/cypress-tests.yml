@@ -15,8 +15,9 @@ name: Embellish Fields EM Cypress Tests
 # Images (published by CCTC_REDCap_Docker/build-redcap-aio.yml and
 # redcap_cypress/build-cypress-runner-aio.yml). They must be built for the SAME
 # REDCap version — the runner docker-cp's that version's install SQL out of the
-# AIO container at runtime.
-#   ghcr.io/cctc-team/cctc_redcap_docker/redcap-aio:latest
+# AIO container at runtime (the runner reads redcap_version from its baked
+# cypress.env.json, currently 17.5.6).
+#   ghcr.io/cctc-team/cctc_redcap_docker/redcap-aio:17.5.6   (pinned REDCap version)
 #   ghcr.io/cctc-team/redcap_cypress/cypress-runner-aio:latest
 
 on:
@@ -45,7 +46,10 @@ env:
   # and runs only its E.123.* specs.
   EM_MODULE: "embellish_fields_v1.1.1"
   REDCAP_CONTAINER: CCTC_REDCap_Docker
-  AIO_IMAGE: ghcr.io/cctc-team/cctc_redcap_docker/redcap-aio:latest
+  # REDCap version under test. Pinned (not :latest) so a REDCap bump in
+  # CCTC_REDCap_Docker is an explicit change here; keep in step with the runner.
+  REDCAP_VERSION: "17.5.6"
+  AIO_IMAGE: ghcr.io/cctc-team/cctc_redcap_docker/redcap-aio:17.5.6
   RUNNER_IMAGE: ghcr.io/cctc-team/redcap_cypress/cypress-runner-aio:latest
 
 jobs:
@@ -101,6 +105,9 @@ jobs:
           timeout 360 bash -c 'until curl -k -s -f https://localhost:8443 > /dev/null 2>&1; do sleep 3; done'
           echo "REDCap is up."
           docker ps
+          # Fail fast if the image doesn't serve the pinned REDCap version.
+          docker exec "${REDCAP_CONTAINER}" test -d "/var/www/html/redcap_v${REDCAP_VERSION}" \
+            || { echo "::error::redcap_v${REDCAP_VERSION} not found in ${AIO_IMAGE}"; exit 1; }
 
       - name: Run Embellish Fields EM specs (E.123.*)
         run: |

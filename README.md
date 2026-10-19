@@ -68,7 +68,8 @@ The module ships with a CI workflow at [.github/workflows/cypress-tests.yml](.gi
 - `CCTC_TEAM_PAT` — PAT with `read:packages` for the private `redcap-aio` / `cypress-runner-aio` GHCR images.
 
 **Version pins** (set as `env` at the top of the workflow)
-- `AIO_IMAGE` / `RUNNER_IMAGE` — the GHCR image refs; both must be built for the **same** REDCap version.
+- `REDCAP_VERSION` / `AIO_IMAGE` — the REDCap version under test (currently **17.5.6**) and the matching `redcap-aio:<version>` image.
+- `RUNNER_IMAGE` — `cypress-runner-aio:latest`; its baked `cypress.env.json` `redcap_version` must match `REDCAP_VERSION`, since it copies that version's install SQL out of the AIO container.
 - `EM_NAME` / `EM_VERSION` — `embellish_fields` / `v1.1.1`. `EM_MODULE` (`embellish_fields_v1.1.1`) is the directory REDCap discovers the module by and the runner uses to locate the specs. Bump `EM_VERSION`/`EM_MODULE` when releasing a new module version so the mount path and spec discovery stay aligned.
 
 ---

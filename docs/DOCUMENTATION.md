@@ -18,7 +18,7 @@ The Embellish Fields module enhances REDCap data entry forms by displaying addit
 | Requirement | Minimum Version | Maximum Version |
 |-------------|-----------------|-----------------|
 | PHP | 8.0.27 | 8.2.29 |
-| REDCap | 13.8.1 | 15.9.1 |
+| REDCap | 13.8.1 | 17.5.6 |
 
 ## Features
 
