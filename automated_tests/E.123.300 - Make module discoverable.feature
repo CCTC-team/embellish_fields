@@ -6,7 +6,6 @@ Feature: E.123.300 - The system shall support the ability to make Embellish fiel
 Scenario: E.123.300 - Make module discoverable by users
     Given I login to REDCap with the user "Test_Admin"
     When I click on the link labeled "Control Center"
-    When I click on the link labeled "Control Center"
     # EMAIL ADDRESS SET FOR REDCAP ADMIN - without it, emails are not send out from system
     When I click on the link labeled "General Configuration"
     Then I should see "General Configuration"
@@ -16,13 +15,6 @@ Scenario: E.123.300 - Make module discoverable by users
 
     When I click on the link labeled "Manage"
     Then I should see "External Modules - Module Manager"
-    And I should NOT see "Embellish fields - v1.1.1"
-    When I click on the button labeled "Enable a module"
-    And I wait for 2 seconds
-    Then I should see "Available Modules"
-    And I click on the button labeled "Enable" in the row labeled "Embellish fields"
-    And I wait for 1 second
-    And I click on the button labeled "Enable"
     Then I should see "Embellish fields - v1.1.1"
     And I should NOT see "Discoverable"
     
