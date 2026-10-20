@@ -29,28 +29,52 @@ on:
       - 'LICENSE'
       - '.gitignore'
       - 'docs/**'
+  # Manual runs default to this commit on the pinned stack. The inputs let you
+  # (re)publish the report of an OLDER module version against the stack it was
+  # released on, e.g. em_ref=f38df7b em_version=v1.1.1 redcap_version=15.5.36
+  # runner_image=ghcr.io/cctc-team/redcap_cypress/cypress-runner-aio:redcap-15.5.36
   workflow_dispatch:
+    inputs:
+      em_ref:
+        description: "EM commit/tag to test (blank = this commit)"
+        required: false
+        default: ""
+      em_version:
+        description: "Module version, vX.Y.Z — sets the module dir and the Pages folder (blank = v1.1.2)"
+        required: false
+        default: ""
+      redcap_version:
+        description: "REDCap version — selects redcap-aio:<version> (blank = 17.5.6)"
+        required: false
+        default: ""
+      runner_image:
+        description: "Runner image built for that REDCap version (blank = cypress-runner-aio:latest)"
+        required: false
+        default: ""
 
 # Cancel an in-progress run when a newer commit is pushed to the same ref, so
 # stacked pushes don't each consume a full run of Actions minutes.
+# Keyed by module version too, so a dispatch republishing an older version and a
+# push testing the current one don't cancel each other.
 concurrency:
-  group: cypress-${{ github.ref }}
+  group: cypress-${{ github.ref }}-${{ inputs.em_version || 'current' }}
   cancel-in-progress: true
 
 env:
   REGISTRY: ghcr.io
   EM_NAME: "embellish_fields"
-  EM_VERSION: "v1.1.1"
+  # inputs.* is empty on push, so the literal after || is the pinned default.
+  EM_VERSION: ${{ inputs.em_version || 'v1.1.2' }}
   # Module directory name REDCap discovers it by (<prefix>_v<version>). Also the
   # runner's EM_MODULE: it copies this dir's automated_tests out of the container
   # and runs only its E.123.* specs.
-  EM_MODULE: "embellish_fields_v1.1.1"
+  EM_MODULE: embellish_fields_${{ inputs.em_version || 'v1.1.2' }}
   REDCAP_CONTAINER: CCTC_REDCap_Docker
   # REDCap version under test. Pinned (not :latest) so a REDCap bump in
   # CCTC_REDCap_Docker is an explicit change here; keep in step with the runner.
-  REDCAP_VERSION: "17.5.6"
-  AIO_IMAGE: ghcr.io/cctc-team/cctc_redcap_docker/redcap-aio:17.5.6
-  RUNNER_IMAGE: ghcr.io/cctc-team/redcap_cypress/cypress-runner-aio:latest
+  REDCAP_VERSION: ${{ inputs.redcap_version || '17.5.6' }}
+  AIO_IMAGE: ghcr.io/cctc-team/cctc_redcap_docker/redcap-aio:${{ inputs.redcap_version || '17.5.6' }}
+  RUNNER_IMAGE: ${{ inputs.runner_image || 'ghcr.io/cctc-team/redcap_cypress/cypress-runner-aio:latest' }}
 
 jobs:
   cypress-tests:
@@ -65,6 +89,7 @@ jobs:
         uses: actions/checkout@v5
         with:
           path: embellish_fields_em
+          ref: ${{ inputs.em_ref }}
 
       - name: Log in to GitHub Container Registry
         # The redcap-aio / cypress-runner-aio packages are private GHCR images;

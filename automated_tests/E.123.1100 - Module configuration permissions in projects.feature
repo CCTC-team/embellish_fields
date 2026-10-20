@@ -8,12 +8,12 @@ Scenario: E.123.1100 - Module configuration permissions in projects
     When I click on the link labeled "Control Center"
     When I click on the link labeled "Manage"
     Then I should see "External Modules - Module Manager"
-    Then I should see "Embellish fields - v1.1.1"
+    Then I should see "Embellish fields - v1.1.2"
     
     When I click on the button labeled "Configure"
     Then I should see the dropdown field labeled "Module configuration permissions in projects" with the option "Require Project Setup/Design privilege" selected
     And I click on the button labeled "Save"
-    Then I should see "Embellish fields - v1.1.1"
+    Then I should see "Embellish fields - v1.1.2"
 
     When I create a new project named "E.123.1100" by clicking on "New Project" in the menu bar, selecting "Practice / Just for fun" from the dropdown, choosing file "fixtures/cdisc_files/Project_redcap_val_nodata.xml", and clicking the "Create Project" button
 
@@ -21,8 +21,8 @@ Scenario: E.123.1100 - Module configuration permissions in projects
     And I click on the second link labeled "Manage"
     Then I should see "External Modules - Project Module Manager"
     When I click on the button labeled "Enable a module"
-    And I click on the button labeled "Enable" in the row labeled "Embellish fields - v1.1.1"
-    Then I should see "Embellish fields - v1.1.1"
+    And I click on the button labeled "Enable" in the row labeled "Embellish fields - v1.1.2"
+    Then I should see "Embellish fields - v1.1.2"
 
     #VERIFY
     When I click on the link labeled "User Rights"
@@ -37,11 +37,11 @@ Scenario: E.123.1100 - Module configuration permissions in projects
     When I click on the link labeled "Control Center"
     And I click on the link labeled "Manage"
     Then I should see "External Modules - Module Manager"
-    And I should see "Embellish fields - v1.1.1"
+    And I should see "Embellish fields - v1.1.2"
     When I click on the button labeled "Configure"
     And I select "Require module-specific user privilege" on the dropdown field labeled "Module configuration permissions in projects"
     And I click on the button labeled "Save"
-    Then I should see "Embellish fields - v1.1.1"
+    Then I should see "Embellish fields - v1.1.2"
 
     When I click on the link labeled "My Projects"
     And I click on the link labeled "E.123.1100"
@@ -59,7 +59,7 @@ Scenario: E.123.1100 - Module configuration permissions in projects
 Scenario: E.123.600 - View Usage of the external module
     When I click on the link labeled "Control Center"
     And I click on the link labeled "Manage"
-    Then I should see "Embellish fields - v1.1.1"
+    Then I should see "Embellish fields - v1.1.2"
     When I click on the button labeled "View Usage"
     And I should see a link labeled "E.123.1100"
     When I click on the link labeled "E.123.1100"
@@ -72,7 +72,7 @@ Scenario: E.123.600 - View Usage of the external module
     And I click on the button labeled "Disable"
     Then I should see "Disable module?"
     When I click on the button labeled "Disable module"
-    Then I should NOT see "Embellish fields - v1.1.1"
+    Then I should NOT see "Embellish fields - v1.1.2"
     And I logout
 
     # Verify no exceptions are thrown in the system

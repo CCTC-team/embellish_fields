@@ -8,13 +8,13 @@ Scenario: E.123.200 - Enable module on all projects by default
     When I click on the link labeled "Control Center"
     When I click on the link labeled "Manage"
     Then I should see "External Modules - Module Manager"
-    Then I should see "Embellish fields - v1.1.1"
+    Then I should see "Embellish fields - v1.1.2"
     And I should NOT see "Enabled for All Projects"
     
     When I click on the button labeled "Configure"
     And I check the checkbox labeled "Enable module on all projects by default"
     And I click on the button labeled "Save"
-    Then I should see "Embellish fields - v1.1.1"
+    Then I should see "Embellish fields - v1.1.2"
     And I should see "Enabled for All Projects"
     And I logout
     
@@ -23,7 +23,7 @@ Scenario: E.123.200 - Enable module on all projects by default
     Then I should see "Manage"
     And I click on the second link labeled "Manage"
     Then I should see "External Modules - Project Module Manager"
-    And I should see "Embellish fields - v1.1.1"
+    And I should see "Embellish fields - v1.1.2"
     And I should see "Enabled for All Projects"
     And I logout
 
@@ -34,7 +34,7 @@ Scenario: E.123.200 - Enable module on all projects by default
     And I click on the button labeled "Disable"
     Then I should see "Disable module?"
     When I click on the button labeled "Disable module"
-    Then I should NOT see "Embellish fields - v1.1.1"
+    Then I should NOT see "Embellish fields - v1.1.2"
     And I logout
 
     # Verify no exceptions are thrown in the system

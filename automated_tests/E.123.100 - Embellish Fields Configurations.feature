@@ -8,7 +8,7 @@ Feature: E.123.100 - The system shall support the ability to enable/disable Embe
     When I click on the link labeled "Control Center"
     And I click on the link labeled "Manage"
     Then I should see "External Modules - Module Manager"
-    Then I should see "Embellish fields - v1.1.1"
+    Then I should see "Embellish fields - v1.1.2"
     And I logout
 
     Given I login to REDCap with the user "Test_User1"
@@ -23,7 +23,7 @@ Feature: E.123.100 - The system shall support the ability to enable/disable Embe
     And I click on the button labeled "Disable"
     Then I should see "Disable module?"
     When I click on the button labeled "Disable module"
-    Then I should NOT see "Embellish fields - v1.1.1"
+    Then I should NOT see "Embellish fields - v1.1.2"
     And I logout
 
     # Verify no exceptions are thrown in the system
