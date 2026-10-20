@@ -43,8 +43,8 @@ Feature: E.123.1200 - The system shall record configuration changes for the Embe
     And I should see a table header and row containing the following values in a table:
       | Name      | Value            |
       | setting   | action-tag-regex |
-      | old_value | (empty)          |
       | new_value | @FOO             |
+      | old_value | (empty)          |
 
     # Dismiss the parameters dialog and return to the log list
     And I click on the button labeled "Close"
@@ -59,8 +59,8 @@ Feature: E.123.1200 - The system shall record configuration changes for the Embe
     And I should see a table header and row containing the following values in a table:
       | Name      | Value               |
       | setting   | include-action-tags |
-      | old_value | (empty)             |
       | new_value | 1                   |
+      | old_value | (empty)             |
 
   Scenario: Changing a setting logs an old->new audit entry
     # rctf starts each scenario from a clean browser page, so re-navigate to the
@@ -93,8 +93,8 @@ Feature: E.123.1200 - The system shall record configuration changes for the Embe
     And I should see a table header and row containing the following values in a table:
       | Name      | Value            |
       | setting   | action-tag-regex |
-      | old_value | @FOO             |
       | new_value | @BAR             |
+      | old_value | @FOO             |
     And I click on the button labeled "Close"
     Then I should see "External Module Logs"
 
