@@ -206,7 +206,6 @@ Feature: E.123.700 - The system shall support the ability to view field variable
       | mm/dd/yyyy hh:mm | test_admin | Disable external module "embellish_fields_v1.1.2" for project                  |
       | mm/dd/yyyy hh:mm | test_admin | Modify configuration for external module "embellish_fields_v1.1.2" for project |
       | mm/dd/yyyy hh:mm | test_admin | Enable external module "embellish_fields_v1.1.2" for project                   |
-      | mm/dd/yyyy hh:mm | test_admin | Enable external module "embellish_fields_v1.1.2" for system                    |
 
     And I logout
 
