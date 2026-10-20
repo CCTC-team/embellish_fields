@@ -43,7 +43,11 @@ Feature: E.123.1200 - The system shall record configuration changes for the Embe
     And I should see a table header and row containing the following values in a table:
       | Name      | Value            |
       | setting   | action-tag-regex |
+    And I should see a table header and row containing the following values in a table:
+      | Name      | Value            |
       | new_value | @FOO             |
+    And I should see a table header and row containing the following values in a table:
+      | Name      | Value            |
       | old_value | (empty)          |
 
     # Dismiss the parameters dialog and return to the log list
@@ -59,7 +63,11 @@ Feature: E.123.1200 - The system shall record configuration changes for the Embe
     And I should see a table header and row containing the following values in a table:
       | Name      | Value               |
       | setting   | include-action-tags |
+    And I should see a table header and row containing the following values in a table:
+      | Name      | Value               |
       | new_value | 1                   |
+    And I should see a table header and row containing the following values in a table:
+      | Name      | Value               |
       | old_value | (empty)             |
 
   Scenario: Changing a setting logs an old->new audit entry
@@ -93,7 +101,11 @@ Feature: E.123.1200 - The system shall record configuration changes for the Embe
     And I should see a table header and row containing the following values in a table:
       | Name      | Value            |
       | setting   | action-tag-regex |
+    And I should see a table header and row containing the following values in a table:
+      | Name      | Value            |
       | new_value | @BAR             |
+    And I should see a table header and row containing the following values in a table:
+      | Name      | Value            |
       | old_value | @FOO             |
     And I click on the button labeled "Close"
     Then I should see "External Module Logs"
