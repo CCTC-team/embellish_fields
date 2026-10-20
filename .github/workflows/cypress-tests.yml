@@ -31,12 +31,12 @@ on:
       - 'docs/**'
   # Manual runs default to this commit on the pinned stack. The inputs let you
   # (re)publish the report of an OLDER module version against the stack it was
-  # released on, e.g. em_ref=f38df7b em_version=v1.1.1 redcap_version=15.5.36
+  # released on, e.g. em_ref=f38df7b5bb4d544c97681c6c978b2f0e924eb5c2 em_version=v1.1.1 redcap_version=15.5.36
   # runner_image=ghcr.io/cctc-team/redcap_cypress/cypress-runner-aio:redcap-15.5.36
   workflow_dispatch:
     inputs:
       em_ref:
-        description: "EM commit/tag to test (blank = this commit)"
+        description: "EM full 40-char commit SHA, tag or branch to test (blank = this commit)"
         required: false
         default: ""
       em_version:
