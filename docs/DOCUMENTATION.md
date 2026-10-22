@@ -13,12 +13,16 @@ The Embellish Fields module enhances REDCap data entry forms by displaying addit
   - Richard Hardy (University of Cambridge - Cambridge Cancer Trials Centre)
   - Mintoo Xavier (Cambridge University Hospital - Cambridge Cancer Trials Centre)
 
-## Compatibility
+## Tested With
 
-| Requirement | Minimum Version | Maximum Version |
-|-------------|-----------------|-----------------|
-| PHP | 8.0.27 | 8.2.29 |
-| REDCap | 13.8.1 | 17.5.6 |
+The module has been tested with:
+
+| | Versions |
+|---|---|
+| PHP | 8.2 |
+| REDCap | 13.8.1, 14.7.0, 15.5.36, 17.5.6 |
+
+`config.json` sets no PHP or REDCap version limits.
 
 ## Features
 
