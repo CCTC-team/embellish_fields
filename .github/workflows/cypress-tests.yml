@@ -16,8 +16,8 @@ name: Embellish Fields EM Cypress Tests
 # redcap_cypress/build-cypress-runner-aio.yml). They must be built for the SAME
 # REDCap version — the runner docker-cp's that version's install SQL out of the
 # AIO container at runtime (the runner reads redcap_version from its baked
-# cypress.env.json, currently 17.5.6).
-#   ghcr.io/cctc-team/cctc_redcap_docker/redcap-aio:17.5.6   (pinned REDCap version)
+# cypress.env.json, currently 17.5.9).
+#   ghcr.io/cctc-team/cctc_redcap_docker/redcap-aio:17.5.9   (pinned REDCap version)
 #   ghcr.io/cctc-team/redcap_cypress/cypress-runner-aio:latest
 
 on:
@@ -44,7 +44,7 @@ on:
         required: false
         default: ""
       redcap_version:
-        description: "REDCap version — selects redcap-aio:<version> (blank = 17.5.6)"
+        description: "REDCap version — selects redcap-aio:<version> (blank = 17.5.9)"
         required: false
         default: ""
       runner_image:
@@ -72,8 +72,8 @@ env:
   REDCAP_CONTAINER: CCTC_REDCap_Docker
   # REDCap version under test. Pinned (not :latest) so a REDCap bump in
   # CCTC_REDCap_Docker is an explicit change here; keep in step with the runner.
-  REDCAP_VERSION: ${{ inputs.redcap_version || '17.5.6' }}
-  AIO_IMAGE: ghcr.io/cctc-team/cctc_redcap_docker/redcap-aio:${{ inputs.redcap_version || '17.5.6' }}
+  REDCAP_VERSION: ${{ inputs.redcap_version || '17.5.9' }}
+  AIO_IMAGE: ghcr.io/cctc-team/cctc_redcap_docker/redcap-aio:${{ inputs.redcap_version || '17.5.9' }}
   RUNNER_IMAGE: ${{ inputs.runner_image || 'ghcr.io/cctc-team/redcap_cypress/cypress-runner-aio:latest' }}
 
 jobs:
